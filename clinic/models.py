@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Owner(models.Model):
@@ -44,3 +45,33 @@ class Pet(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.owner})"
+
+
+
+class Appointment(models.Model):
+    STATUS_CHOICES = [
+        ('BOOKED', 'Booked'),
+        ('COMPLETED', 'Completed'),
+        ('CANCELLED', 'Cancelled'),
+    ]
+
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='appointments')
+    vet = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'is_staff': True},
+        related_name='appointments',
+    )
+    scheduled_at = models.DateTimeField()
+    reason = models.CharField(max_length=200)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='BOOKED')
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['scheduled_at']
+
+    def __str__(self):
+        return f"{self.pet.name} - {self.scheduled_at:%Y-%m-%d %H:%M}"
