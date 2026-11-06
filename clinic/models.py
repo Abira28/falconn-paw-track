@@ -75,3 +75,23 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.pet.name} - {self.scheduled_at:%Y-%m-%d %H:%M}"
+
+
+class Visit(models.Model):
+    appointment = models.OneToOneField(
+        Appointment, on_delete=models.CASCADE, related_name='visit'
+    )
+    weight_kg = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    temperature_c = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
+    diagnosis = models.TextField()
+    treatment = models.TextField()
+    medication = models.TextField(blank=True)
+    follow_up_date = models.DateField(null=True, blank=True)
+    fee = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Visit: {self.appointment}"

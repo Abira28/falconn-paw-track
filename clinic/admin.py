@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Owner, Pet, Appointment
+from .models import Owner, Pet, Appointment, Visit
 
 
 @admin.register(Owner)
@@ -22,3 +22,11 @@ class AppointmentAdmin(admin.ModelAdmin):
     list_filter = ('status', 'vet')
     search_fields = ('pet__name', 'reason')
     date_hierarchy = 'scheduled_at'
+
+
+    
+
+@admin.register(Visit)
+class VisitAdmin(admin.ModelAdmin):
+    list_display = ('appointment', 'diagnosis', 'fee', 'follow_up_date')
+    search_fields = ('appointment__pet__name', 'diagnosis')
