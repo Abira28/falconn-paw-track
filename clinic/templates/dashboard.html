@@ -1,0 +1,57 @@
+{% extends "clinic/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Front desk</h1>
+
+<div class="stats">
+    <div class="stat"><span class="stat-num">{{ owner_count }}</span><span>Owners</span></div>
+    <div class="stat"><span class="stat-num">{{ pet_count }}</span><span>Pets</span></div>
+    <div class="stat"><span class="stat-num">{{ visit_count }}</span><span>Visits</span></div>
+</div>
+
+<section class="panel">
+    <h2>Today's appointments</h2>
+    <table>
+        <thead>
+            <tr><th>Time</th><th>Pet</th><th>Owner</th><th>Vet</th><th>Reason</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+        {% for a in todays_appointments %}
+            <tr>
+                <td>{{ a.scheduled_at|time:"H:i" }}</td>
+                <td>{{ a.pet.name }}</td>
+                <td>{{ a.pet.owner }}</td>
+                <td>{{ a.vet|default:"Unassigned" }}</td>
+                <td>{{ a.reason }}</td>
+                <td><span class="badge badge-{{ a.status|lower }}">{{ a.get_status_display }}</span></td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6">No appointments today.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="panel">
+    <h2>Follow-ups due in the next 7 days</h2>
+    <table>
+        <thead>
+            <tr><th>Date</th><th>Pet</th><th>Owner</th><th>Phone</th></tr>
+        </thead>
+        <tbody>
+        {% for v in follow_ups %}
+            <tr>
+                <td>{{ v.follow_up_date|date:"D, j M" }}</td>
+                <td>{{ v.appointment.pet.name }}</td>
+                <td>{{ v.appointment.pet.owner }}</td>
+                <td>{{ v.appointment.pet.owner.phone }}</td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">No follow-ups due.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

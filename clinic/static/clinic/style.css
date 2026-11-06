@@ -1,0 +1,76 @@
+:root {
+    --primary: #c62828;      /* main brand color: red */
+    --primary-dark: #8e0000;
+    --success: #2e7d32;      /* green for good news */
+    --bg: #ffffff;
+    --surface: #f7f7f7;
+    --text: #1f1f1f;
+    --muted: #6b6b6b;
+    --border: #e3e3e3;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    border-bottom: 4px solid var(--primary);
+    background: var(--bg);
+}
+
+.brand { font-size: 22px; font-weight: 700; }
+.brand-accent { color: var(--primary); }
+
+.topbar nav a {
+    margin-left: 20px;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+}
+.topbar nav a:hover { color: var(--primary); }
+
+.container { max-width: 1100px; margin: 32px auto; padding: 0 20px; }
+
+h1 { margin-bottom: 20px; }
+h2 { margin-bottom: 12px; font-size: 18px; }
+
+.stats { display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.stat {
+    flex: 1;
+    min-width: 160px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    color: var(--muted);
+}
+.stat-num { font-size: 32px; font-weight: 700; color: var(--text); }
+
+.panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+}
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+th { font-size: 13px; text-transform: uppercase; color: var(--muted); }
+
+.badge { padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: #fff; }
+.badge-booked { background: #1565c0; }
+.badge-completed { background: var(--success); }
+.badge-cancelled { background: var(--primary); }
