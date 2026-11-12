@@ -115,7 +115,7 @@ ul, ol { list-style: none; }
 .hero {
     min-height: min(88vh, 740px);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     background-color: var(--green-deep);
     background-image: var(--hero-img);
     background-size: cover;
@@ -123,8 +123,8 @@ ul, ol { list-style: none; }
 }
 .hero-panel {
     width: 100%;
-    max-width: 540px;
-    margin: 40px 24px 40px max(24px, calc((100% - var(--wrap)) / 2 + 24px));
+    max-width: 500px;
+    margin: 56px 24px 40px max(24px, calc((100% - var(--wrap)) / 2 + 24px));
     padding: 36px 38px 40px;
     background: var(--white);
     border-top: 6px solid var(--red);
@@ -133,7 +133,7 @@ ul, ol { list-style: none; }
 .hero h1 {
     font-family: var(--head);
     font-weight: 800;
-    font-size: clamp(2.1rem, 4.6vw, 3.2rem);
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
     line-height: 1.08;
     letter-spacing: -0.02em;
     margin: 14px 0;
@@ -326,7 +326,7 @@ ul, ol { list-style: none; }
     .hero { align-items: flex-end; }
     .hero-panel { margin: 120px 16px 16px; padding: 28px 24px 30px; }
     .nav-links a.nav-staff { display: none; }
-    .form-panel { padding: 22px; }
+    .form-panel { padding: 28px 32px 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
