@@ -37,6 +37,7 @@ class Pet(models.Model):
     breed = models.CharField(max_length=50, blank=True)
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
     date_of_birth = models.DateField(null=True, blank=True)
+    photo = models.ImageField(upload_to='pet_photos/', blank=True)
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -46,6 +47,15 @@ class Pet(models.Model):
     def __str__(self):
         return f"{self.name} ({self.owner})"
 
+    @property
+    def species_emoji(self):
+        return {
+            'DOG': '🐕',
+            'CAT': '🐈',
+            'BIRD': '🐦',
+            'RABBIT': '🐇',
+            'LIVESTOCK': '🐄',
+        }.get(self.species, '🐾')
 
 
 class Appointment(models.Model):

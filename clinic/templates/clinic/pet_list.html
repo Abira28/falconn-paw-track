@@ -1,0 +1,35 @@
+{% extends "clinic/base.html" %}
+
+{% block title %}Pets{% endblock %}
+
+{% block content %}
+<h1>Pets</h1>
+
+<form method="get" class="search">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search by pet, breed or owner">
+    <button type="submit">Search</button>
+    {% if query %}<a href="{% url 'pet_list' %}" class="clear">Clear</a>{% endif %}
+</form>
+
+<section class="panel">
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Species</th><th>Breed</th><th>Sex</th><th>Owner</th><th>Phone</th></tr>
+        </thead>
+        <tbody>
+        {% for pet in pets %}
+            <tr>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.get_species_display }}</td>
+                <td>{{ pet.breed|default:"-" }}</td>
+                <td>{{ pet.get_sex_display }}</td>
+                <td>{{ pet.owner }}</td>
+                <td>{{ pet.owner.phone }}</td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6">No pets found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

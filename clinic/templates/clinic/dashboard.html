@@ -3,13 +3,44 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<h1>Front desk</h1>
+<section class="hero">
+    <div>
+        <h1>Good day, {{ request.user.first_name|default:request.user.username }}</h1>
+        <p>{{ today|date:"l, j F Y" }} &middot; {{ todays_appointments|length }} appointment{{ todays_appointments|length|pluralize }} today</p>
+    </div>
+    <div class="hero-actions">
+        <a href="{% url 'admin:clinic_appointment_add' %}">Book appointment</a>
+        <a href="{% url 'admin:clinic_pet_add' %}">Add pet</a>
+    </div>
+</section>
 
 <div class="stats">
-    <div class="stat"><span class="stat-num">{{ owner_count }}</span><span>Owners</span></div>
-    <div class="stat"><span class="stat-num">{{ pet_count }}</span><span>Pets</span></div>
-    <div class="stat"><span class="stat-num">{{ visit_count }}</span><span>Visits</span></div>
+    <div class="stat"><span class="stat-icon">👤</span><div><span class="stat-num">{{ owner_count }}</span><span class="stat-label">Owners</span></div></div>
+    <div class="stat"><span class="stat-icon">🐾</span><div><span class="stat-num">{{ pet_count }}</span><span class="stat-label">Pets</span></div></div>
+    <div class="stat"><span class="stat-icon">🩺</span><div><span class="stat-num">{{ visit_count }}</span><span class="stat-label">Visits</span></div></div>
 </div>
+
+<section class="panel">
+    <h2>Recent patients</h2>
+    <div class="pet-grid">
+        {% for pet in recent_pets %}
+        <div class="pet-card">
+            {% if pet.photo %}
+                <img src="{{ pet.photo.url }}" alt="{{ pet.name }}" class="pet-photo">
+            {% else %}
+                <div class="pet-photo pet-photo-fallback">{{ pet.species_emoji }}</div>
+            {% endif %}
+            <div class="pet-info">
+                <div class="pet-name">{{ pet.name }}</div>
+                <div class="pet-meta">{{ pet.breed|default:pet.get_species_display }}</div>
+                <div class="pet-meta">{{ pet.owner }}</div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No pets registered yet.</p>
+        {% endfor %}
+    </div>
+</section>
 
 <section class="panel">
     <h2>Today's appointments</h2>
@@ -21,7 +52,7 @@
         {% for a in todays_appointments %}
             <tr>
                 <td>{{ a.scheduled_at|time:"H:i" }}</td>
-                <td>{{ a.pet.name }}</td>
+                <td>{% include "clinic/_pet_avatar.html" with pet=a.pet %} {{ a.pet.name }}</td>
                 <td>{{ a.pet.owner }}</td>
                 <td>{{ a.vet|default:"Unassigned" }}</td>
                 <td>{{ a.reason }}</td>
