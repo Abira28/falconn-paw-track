@@ -1,0 +1,38 @@
+{% extends "clinic/site_base.html" %}
+
+{% block title %}Services | {{ clinic.name }}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <div class="wrap">
+        <h1>Services for every stage of your pet's life.</h1>
+        <p>Routine care, treatment and emergencies, all handled under one roof.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap">
+        {% for title, items in groups %}
+        <div class="svc-group">
+            <h2>{{ title }}</h2>
+            <ul class="svc">
+                {% for name, description in items %}
+                <li><strong>{{ name }}</strong><span>{{ description }}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section section-wash">
+    <div class="wrap">
+        <h2>Not sure what your pet needs?</h2>
+        <p class="intro">Describe what you have noticed and we will advise on the right visit.</p>
+        <div class="actions">
+            <a class="btn btn-red" href="{% url 'book' %}">Book a visit</a>
+            <a class="btn btn-line" href="tel:{{ clinic.phone_link }}">Call {{ clinic.phone }}</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

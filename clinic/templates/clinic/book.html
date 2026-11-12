@@ -1,0 +1,32 @@
+{% extends "clinic/site_base.html" %}
+
+{% block title %}Book a visit | {{ clinic.name }}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <div class="wrap">
+        <h1>Book a visit</h1>
+        <p>Tell us about your pet and when suits you. We will call to confirm the time.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap split">
+        <form method="post" class="form-panel" novalidate>
+            {% csrf_token %}
+            {% include "clinic/_fields.html" %}
+            <button type="submit" class="btn btn-red">Send booking request</button>
+        </form>
+
+        <div>
+            <h2>What happens next</h2>
+            <ol class="aside-list">
+                <li><strong>We read your request</strong><span>A member of the team reviews it the same day.</span></li>
+                <li><strong>We call you</strong><span>We confirm a time or suggest the nearest one that is free.</span></li>
+                <li><strong>You visit the clinic</strong><span>Bring your pet and any earlier records.</span></li>
+            </ol>
+            <p class="intro" style="margin-top: 26px;">Is it urgent? Call <a href="tel:{{ clinic.phone_link }}">{{ clinic.phone }}</a> now instead of waiting for a reply.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

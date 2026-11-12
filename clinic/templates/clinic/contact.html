@@ -1,0 +1,52 @@
+{% extends "clinic/site_base.html" %}
+
+{% block title %}Contact and location | {{ clinic.name }}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <div class="wrap">
+        <h1>Find us, call us, or send a message.</h1>
+        <p>We usually reply within one working day.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap split">
+        <div>
+            <h2>Clinic details</h2>
+            <dl class="details">
+                <dt>Address</dt>
+                <dd>{{ clinic.address }}</dd>
+                <dt>Phone</dt>
+                <dd><a href="tel:{{ clinic.phone_link }}">{{ clinic.phone }}</a></dd>
+                <dt>Email</dt>
+                <dd><a href="mailto:{{ clinic.email }}">{{ clinic.email }}</a></dd>
+                <dt>Opening hours</dt>
+                <dd>
+                    <table class="hours">
+                        {% for days, time in hours %}
+                        <tr><th scope="row">{{ days }}</th><td>{{ time }}</td></tr>
+                        {% endfor %}
+                    </table>
+                </dd>
+            </dl>
+        </div>
+
+        <form method="post" class="form-panel" novalidate>
+            <h2>Send us a message</h2>
+            {% csrf_token %}
+            {% include "clinic/_fields.html" %}
+            <button type="submit" class="btn btn-red">Send message</button>
+        </form>
+    </div>
+</section>
+
+<section class="section section-wash">
+    <div class="wrap map">
+        <h2>Where to find the clinic</h2>
+        <p class="intro">{{ clinic.address }}</p>
+        <iframe title="Map showing the clinic location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://maps.google.com/maps?q={{ clinic.map_query|urlencode }}&z=15&output=embed"></iframe>
+    </div>
+</section>
+{% endblock %}

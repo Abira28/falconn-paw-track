@@ -1,0 +1,44 @@
+{% extends "clinic/site_base.html" %}
+
+{% block title %}About us | {{ clinic.name }}{% endblock %}
+
+{# Sample text below. Replace it with your clinic's real story before going live. #}
+
+{% block content %}
+<section class="page-head">
+    <div class="wrap">
+        <h1>Veterinary care you can ask questions of.</h1>
+        <p>{{ clinic.name }} looks after the animals of families and farms in and around Nairobi.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap split">
+        <div class="prose">
+            <h2>Who we are</h2>
+            <p>We are a team of vets and animal-care staff who believe a clinic visit should leave you understanding more than when you walked in.</p>
+            <p>Every pet that comes through our door gets a digital health record: weight, diagnosis, treatment and the date of the next vaccine. Any member of our team can see the full history, so you never have to start your pet's story from the beginning.</p>
+            <p>We treat dogs, cats, birds and rabbits at the clinic, and visit farms for livestock by arrangement.</p>
+        </div>
+        <div>
+            <h2>What you can expect</h2>
+            <div class="principles">
+                <p class="principle"><strong>Clear explanations</strong><span>We tell you what we found, what we recommend and what it will cost, before we start.</span></p>
+                <p class="principle"><strong>Records that follow your pet</strong><span>Past visits, medicines and weights are one search away for any of our vets.</span></p>
+                <p class="principle"><strong>Reminders before it matters</strong><span>We keep track of follow-up dates so a vaccine or check is not forgotten.</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-wash">
+    <div class="wrap">
+        <h2>Bring your pet in</h2>
+        <p class="intro">Send us a booking request and we will call to confirm a time.</p>
+        <div class="actions">
+            <a class="btn btn-red" href="{% url 'book' %}">Book a visit</a>
+            <a class="btn btn-line" href="{% url 'contact' %}">Find the clinic</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

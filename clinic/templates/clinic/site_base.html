@@ -1,0 +1,67 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ clinic.name }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}Veterinary care for dogs, cats, birds, rabbits and livestock. Book a visit online or call us.{% endblock %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'clinic/css/site.css' %}">
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav">
+        <div class="wrap nav-inner">
+            <a class="logo" href="{% url 'home' %}">
+                <svg class="paw" viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="6" cy="14" rx="3.2" ry="4.4"/><ellipse cx="12.5" cy="7.5" rx="3.2" ry="4.6"/><ellipse cx="21" cy="7.5" rx="3.2" ry="4.6"/><ellipse cx="27" cy="14" rx="3.2" ry="4.4"/><path d="M16 15c-5 0-9 4-9 8 0 3 2.5 4 5 4 2 0 3-1 4-1s2 1 4 1c2.5 0 5-1 5-4 0-4-4-8-9-8z"/></svg>
+                PawTrack
+            </a>
+            <nav class="nav-links" aria-label="Main">
+                <a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %}>About us</a>
+                <a href="{% url 'services' %}" {% if request.resolver_match.url_name == 'services' %}aria-current="page"{% endif %}>Services</a>
+                <a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}aria-current="page"{% endif %}>Contact</a>
+                <a class="nav-staff" href="{% url 'dashboard' %}">Staff login</a>
+                <a class="nav-book" href="{% url 'book' %}">Book a visit</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="foot">
+        <div class="wrap">
+            <div class="foot-grid">
+                <div>
+                    <h2>{{ clinic.name }}</h2>
+                    <p>Veterinary care for dogs, cats, birds, rabbits and livestock.</p>
+                </div>
+                <div>
+                    <h2>Find us</h2>
+                    <address>
+                        {{ clinic.address }}<br>
+                        <a href="tel:{{ clinic.phone_link }}">{{ clinic.phone }}</a><br>
+                        <a href="mailto:{{ clinic.email }}">{{ clinic.email }}</a>
+                    </address>
+                </div>
+                <div>
+                    <h2>Opening hours</h2>
+                    <table class="hours">
+                        {% for days, time in hours %}
+                        <tr><th scope="row">{{ days }}</th><td>{{ time }}</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="foot-base">
+                <span>&copy; {% now "Y" %} {{ clinic.name }}</span>
+                <a href="{% url 'dashboard' %}">Staff login</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

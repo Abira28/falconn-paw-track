@@ -105,3 +105,29 @@ class Visit(models.Model):
 
     def __str__(self):
         return f"Visit: {self.appointment}"
+
+
+class Enquiry(models.Model):
+    """A booking request or message sent from the public website."""
+
+    KIND_CHOICES = [
+        ('BOOKING', 'Appointment request'),
+        ('GENERAL', 'General message'),
+    ]
+
+    kind = models.CharField(max_length=10, choices=KIND_CHOICES, default='GENERAL')
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=30)
+    email = models.EmailField(blank=True)
+    pet_name = models.CharField(max_length=50, blank=True)
+    preferred_date = models.DateField(null=True, blank=True)
+    message = models.TextField(blank=True)
+    handled = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = 'Enquiries'
+
+    def __str__(self):
+        return f"{self.get_kind_display()} from {self.name}"
