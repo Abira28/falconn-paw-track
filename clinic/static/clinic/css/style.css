@@ -202,3 +202,7 @@ tbody tr:hover { background: #fafafa; }
     .topbar { padding: 12px 16px; }
     .hero { padding: 22px 20px; }
 }
+
+
+.pet-photo-fallback { font-weight: 800; color: var(--primary); }
+.avatar { font-weight: 700; color: var(--primary); font-size: 1.1rem; }

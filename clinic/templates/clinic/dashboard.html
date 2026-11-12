@@ -28,7 +28,7 @@
             {% if pet.photo %}
                 <img src="{{ pet.photo.url }}" alt="{{ pet.name }}" class="pet-photo">
             {% else %}
-                <div class="pet-photo pet-photo-fallback">{{ pet.species_emoji }}</div>
+                <div class="pet-photo pet-photo-fallback">{{ pet.name|first|upper }}</div>
             {% endif %}
             <div class="pet-info">
                 <div class="pet-name">{{ pet.name }}</div>

@@ -47,16 +47,6 @@ class Pet(models.Model):
     def __str__(self):
         return f"{self.name} ({self.owner})"
 
-    @property
-    def species_emoji(self):
-        return {
-            'DOG': '🐕',
-            'CAT': '🐈',
-            'BIRD': '🐦',
-            'RABBIT': '🐇',
-            'LIVESTOCK': '🐄',
-        }.get(self.species, '🐾')
-
 
 class Appointment(models.Model):
     STATUS_CHOICES = [
