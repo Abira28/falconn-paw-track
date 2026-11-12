@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'clinic/img/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'clinic/img/apple-touch-icon.png' %}">
     <link rel="stylesheet" href="{% static 'clinic/css/site.css' %}">
 </head>
 <body>
@@ -16,8 +18,8 @@
     <header class="nav">
         <div class="wrap nav-inner">
             <a class="logo" href="{% url 'home' %}">
-                <svg class="paw" viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="6" cy="14" rx="3.2" ry="4.4"/><ellipse cx="12.5" cy="7.5" rx="3.2" ry="4.6"/><ellipse cx="21" cy="7.5" rx="3.2" ry="4.6"/><ellipse cx="27" cy="14" rx="3.2" ry="4.4"/><path d="M16 15c-5 0-9 4-9 8 0 3 2.5 4 5 4 2 0 3-1 4-1s2 1 4 1c2.5 0 5-1 5-4 0-4-4-8-9-8z"/></svg>
-                PawTrack
+                <img src="{% static 'clinic/img/logo-emblem.png' %}" alt="" width="46" height="46" style="width: 46px; height: 46px;">
+                Falconn Paw Track
             </a>
             <nav class="nav-links" aria-label="Main">
                 <a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %}>About us</a>
@@ -37,7 +39,7 @@
         <div class="wrap">
             <div class="foot-grid">
                 <div>
-                    <h2>{{ clinic.name }}</h2>
+                    <img src="{% static 'clinic/img/logo-lockup.png' %}" alt="{{ clinic.name }}" width="230" height="118" style="display: block; width: 230px; max-width: 100%; height: auto; mix-blend-mode: multiply; margin-bottom: 14px;">
                     <p>Veterinary care for dogs, cats, birds, rabbits and livestock.</p>
                 </div>
                 <div>

@@ -7,7 +7,7 @@ from .forms import BookingForm, ContactForm
 # EDIT THIS BLOCK: your clinic's real details. They appear across the site.
 # ---------------------------------------------------------------------------
 CLINIC = {
-    'name': 'PawTrack Veterinary Clinic',
+    'name': 'Falconn PawTrack Veterinary Clinic',
     'phone': '+254 700 205 777',
     'phone_link': '+254700000000',
     'email': 'info@falconnpawtrack.com',
