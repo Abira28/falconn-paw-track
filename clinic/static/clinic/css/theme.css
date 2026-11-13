@@ -1,0 +1,68 @@
+/* Falconn Paw Track theme: navy and orange, taken from the logo.
+
+   This file loads after site.css and style.css, so it only has to change
+   colours. To go back to the old red and green look, delete the theme.css
+   <link> line from site_base.html and base.html. */
+
+:root {
+    --navy: #0b2260;
+    --navy-dark: #021949;
+    --orange: #fe7002;
+    --orange-dark: #e05f00;
+    --orange-text: #bf4f00;   /* darker orange, readable as text on white */
+    --link: #0b3a8c;
+
+    /* public website (site.css) */
+    --red: var(--orange);
+    --red-dark: var(--orange-text);
+    --green: var(--orange-text);
+    --green-deep: var(--navy-dark);
+    --wash: #f3f6fb;
+    --ink: #161e3b;
+    --muted: #566079;
+    --line: #dde3ef;
+
+    /* staff area (style.css) */
+    --primary: var(--navy);
+    --primary-dark: var(--navy-dark);
+    --primary-soft: #e9eef9;
+    --bg: #f4f6fa;
+    --text: #161e3b;
+    --border: #dde3ef;
+}
+
+a { color: var(--link); }
+
+/* ---------- Public website ---------- */
+.btn-red,
+.nav-links a.nav-book { background: var(--orange); color: var(--navy-dark); }
+.btn-red:hover,
+.nav-links a.nav-book:hover { background: var(--orange-dark); color: var(--navy-dark); }
+
+.steps li { border-top-color: var(--orange); }
+.steps li::before { color: var(--orange-text); }
+
+.field input:focus,
+.field textarea:focus { outline-color: rgba(254, 112, 0, 0.45); border-color: var(--orange-dark); }
+
+/* Status and errors keep meaningful colours */
+.error { color: #b3261e; }
+.status { color: #b3261e; }
+.status .dot { background: #b3261e; }
+.status.is-open { color: #1f6b2e; }
+.status.is-open .dot { background: #2e9e45; }
+
+/* ---------- Staff area ---------- */
+.topbar { border-bottom-color: var(--orange); }
+.brand-accent { color: var(--orange-text); }
+.badge-cancelled { background: #b3261e; }
+.badge-booking { background: var(--orange-text); }
+.badge-general { background: var(--muted); }
+
+.stat-icon { color: var(--navy); }
+.stat-icon svg { width: 26px; height: 26px; display: block; }
+.stat-link { color: inherit; text-decoration: none; }
+.stat-link:hover { border-color: var(--orange); }
+.stat-alert { border-color: var(--orange); background: #fff7f0; }
+.stat-alert .stat-icon { background: var(--orange); color: var(--navy-dark); }
+.panel-more { display: inline-block; margin-top: 14px; font-weight: 700; }
