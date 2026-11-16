@@ -332,3 +332,19 @@ ul, ol { list-style: none; }
     html { scroll-behavior: auto; }
     .btn { transition: none; }
 }
+
+/* Compact hero panel so the kitten stays visible */
+@media (min-width: 641px) {
+    .hero { align-items: flex-start; }
+    .hero-panel {
+        max-width: 480px;
+        margin-top: 18px;
+        padding: 20px 26px 24px;
+    }
+    .hero-panel .status { font-size: 0.85rem; }
+    .hero-panel h1 { font-size: clamp(1.6rem, 2.6vw, 2rem); margin: 6px 0 8px; }
+    .hero-panel .lead { font-size: 0.95rem; line-height: 1.5; }
+    .hero-panel .actions { margin-top: 16px; gap: 10px; }
+    .hero-panel .btn { padding: 10px 20px; font-size: 0.95rem; }
+}
+

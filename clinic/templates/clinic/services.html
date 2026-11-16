@@ -1,4 +1,5 @@
 {% extends "clinic/site_base.html" %}
+{% load site_tags %}
 
 {% block title %}Services | {{ clinic.name }}{% endblock %}
 
@@ -12,14 +13,29 @@
 
 <section class="section">
     <div class="wrap">
+        <p class="intro">Tap a service to see what is included.</p>
         {% for title, items in groups %}
         <div class="svc-group">
             <h2>{{ title }}</h2>
-            <ul class="svc">
+            <div class="acc">
                 {% for name, description in items %}
-                <li><strong>{{ name }}</strong><span>{{ description }}</span></li>
+                {% service_detail name as detail %}
+                <details class="acc-item" name="services">
+                    <summary>
+                        <strong>{{ name }}</strong>
+                        <span class="acc-desc">{{ description }}</span>
+                        <span class="chev" aria-hidden="true"></span>
+                    </summary>
+                    <div class="acc-body">
+                        {% if detail.included %}
+                        <ul>{% for point in detail.included %}<li>{{ point }}</li>{% endfor %}</ul>
+                        {% endif %}
+                        {% if detail.note %}<p class="acc-note">{{ detail.note }}</p>{% endif %}
+                        <a class="btn btn-red" href="{% url 'book' %}">Book this visit</a>
+                    </div>
+                </details>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
         {% endfor %}
     </div>

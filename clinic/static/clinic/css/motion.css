@@ -1,0 +1,111 @@
+/* Gentle movement for the public website. Loaded after theme.css.
+   Everything here is switched off for visitors who ask their device to
+   reduce motion. */
+
+/* ---------- Tap-to-open cards and questions ---------- */
+.acc { border-top: 1px solid var(--line); }
+.acc-item { border-bottom: 1px solid var(--line); }
+
+.acc-item summary {
+    display: grid;
+    grid-template-columns: minmax(170px, 1fr) 2fr 28px;
+    gap: 6px 32px;
+    align-items: center;
+    margin: 0 -12px;
+    padding: 18px 12px;
+    cursor: pointer;
+    list-style: none;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.12s;
+}
+.acc-item summary::-webkit-details-marker { display: none; }
+.acc-item summary:hover { background: var(--wash); }
+.acc-item summary:active { transform: scale(0.995); }
+.acc-item summary strong { font-family: var(--head); font-size: 1.15rem; }
+.acc-desc { color: var(--muted); }
+
+.faq-item summary { grid-template-columns: 1fr 28px; }
+
+/* The arrow turns as the card opens */
+.chev {
+    justify-self: end;
+    width: 11px;
+    height: 11px;
+    margin-right: 8px;
+    border-right: 3px solid var(--orange-text);
+    border-bottom: 3px solid var(--orange-text);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 0.3s ease;
+}
+.acc-item[open] .chev { transform: rotate(-135deg) translate(-2px, -2px); }
+
+.acc-body { max-width: 62ch; padding: 2px 0 24px; animation: acc-open 0.35s ease; }
+.acc-body ul { list-style: none; margin-bottom: 14px; }
+.acc-body li { position: relative; padding-left: 26px; margin-bottom: 6px; }
+.acc-body li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 0.5em;
+    width: 11px;
+    height: 6px;
+    border-left: 3px solid #2e7d32;
+    border-bottom: 3px solid #2e7d32;
+    transform: rotate(-45deg);
+}
+.acc-note { color: var(--muted); margin-bottom: 16px; }
+
+@keyframes acc-open {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* ---------- Fade up as sections scroll into view ---------- */
+.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Buttons and links respond to hover and press ---------- */
+.btn { transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s, color 0.15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(2, 25, 73, 0.2); }
+.btn:active { transform: translateY(0) scale(0.97); box-shadow: none; }
+
+.nav-links a { transition: background 0.15s, color 0.15s; }
+.nav-links a:not(.nav-book):hover { background: var(--wash); }
+.logo img { transition: transform 0.3s ease; }
+.logo:hover img { transform: rotate(-6deg) scale(1.07); }
+
+/* ---------- Paw print that appears where you tap ---------- */
+.paw-tap {
+    position: fixed;
+    z-index: 200;
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    color: var(--orange);
+    pointer-events: none;
+    animation: paw-pop 0.9s ease-out forwards;
+}
+.paw-tap svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+
+@keyframes paw-pop {
+    0% { opacity: 0; transform: rotate(var(--tilt)) scale(0.4); }
+    25% { opacity: 0.9; transform: rotate(var(--tilt)) scale(1.1); }
+    100% { opacity: 0; transform: rotate(var(--tilt)) translateY(-16px) scale(1); }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 640px) {
+    .acc-item summary { grid-template-columns: 1fr 28px; }
+    .acc-item summary strong { grid-column: 1; grid-row: 1; }
+    .acc-item summary .chev { grid-column: 2; grid-row: 1; }
+    .acc-item summary .acc-desc { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* ---------- Visitors who prefer no motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .acc-body { animation: none; }
+    .chev, .acc-item summary, .logo img, .nav-links a { transition: none; }
+    .btn, .btn:hover, .btn:active { transition: none; transform: none; box-shadow: none; }
+    .paw-tap { display: none; }
+}

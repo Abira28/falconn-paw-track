@@ -1,5 +1,5 @@
 {% extends "clinic/site_base.html" %}
-{% load static %}
+{% load static site_tags %}
 
 {% block title %}{{ clinic.name }}{% endblock %}
 
@@ -39,6 +39,22 @@
             <li><strong>Visit the clinic</strong><span>Bring your pet and any earlier health records.</span></li>
             <li><strong>Stay on track</strong><span>We record the visit and remind you about vaccines and follow-ups.</span></li>
         </ol>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap">
+        <h2>Common questions</h2>
+        <p class="intro">Tap a question to see the answer.</p>
+        <div class="acc">
+            {% faq_list as faqs %}
+            {% for question, answer in faqs %}
+            <details class="acc-item faq-item" name="faq">
+                <summary><strong>{{ question }}</strong><span class="chev" aria-hidden="true"></span></summary>
+                <div class="acc-body"><p>{{ answer }}</p></div>
+            </details>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
