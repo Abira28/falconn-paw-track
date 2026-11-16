@@ -5,6 +5,7 @@
 
 {% block content %}
 <section class="hero" style="--hero-img: url('{% static 'clinic/img/hero.jpg' %}');">
+        <img class="hero-photo" src="{% static 'clinic/img/hero.jpg' %}" alt="Puppies and a kitten peeking over a ledge">
     <div class="hero-panel">
         <p class="status {% if status.open %}is-open{% endif %}"><span class="dot"></span>{{ status.text }}</p>
         <h1>Your pet's health, in careful hands.</h1>

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-hz8n-8@sbp(ltluv-2h601!zm36*zrwk_7ze_6c&*w#g09oq!6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.devtunnels.ms', '.trycloudflare.com', '.ngrok-free.app', '.ngrok-free.dev']
 
 
 # Application definition
@@ -126,3 +126,10 @@ LOGIN_URL = '/admin/login/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.devtunnels.ms',
+    'https://*.trycloudflare.com',
+    'https://*.ngrok-free.app',
+    'https://*.ngrok-free.dev',
+]

@@ -348,3 +348,22 @@ ul, ol { list-style: none; }
     .hero-panel .btn { padding: 10px 20px; font-size: 0.95rem; }
 }
 
+/* Phones: show the whole hero photo, then the text underneath */
+.hero-photo { display: none; }
+
+@media (max-width: 640px) {
+    .hero { display: block; min-height: 0; background-image: none; background-color: var(--white); }
+    .hero-photo { display: block; width: 100%; height: auto; }
+    .hero-panel { max-width: none; margin: 0; border-radius: 0; padding: 22px 20px 28px; }
+    .hero-panel h1 { font-size: 1.85rem; }
+    .hero-panel .actions { flex-direction: column; }
+    .hero-panel .btn { width: 100%; text-align: center; }
+
+    /* A shorter header */
+    .nav-inner { padding-top: 8px; padding-bottom: 8px; gap: 2px 12px; }
+    .logo { font-size: 1.25rem; }
+    .logo img { width: 38px !important; height: 38px !important; }
+    .nav-links { width: 100%; justify-content: space-between; gap: 0; }
+    .nav-links a { padding: 8px 6px; font-size: 0.92rem; }
+    .nav-links a.nav-book { margin-left: 0; padding: 8px 12px; }
+}
