@@ -1,0 +1,105 @@
+/* Dark mode for the public website. Loaded after theme.css and motion.css.
+   It is switched on by <html data-theme="dark">, which the little script in
+   site_base.html sets from the visitor's saved choice or device setting. */
+
+/* ---------- Toggle button (both modes) ---------- */
+.nav-inner { justify-content: flex-start; }
+.nav-links { margin-left: auto; }
+
+.theme-toggle {
+    order: 3;
+    margin-left: 12px;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: var(--ink);
+    background: transparent;
+    border: 1.5px solid var(--line);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.12s;
+}
+.theme-toggle:hover { background: var(--wash); }
+.theme-toggle:active { transform: scale(0.92); }
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.theme-toggle .icon-sun { display: none; }
+
+/* ---------- Dark palette ---------- */
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --dk-page: #0b1226;
+    --dk-surface: #131c38;
+    --ink: #e9eefc;
+    --muted: #a8b3d1;
+    --line: #26325a;
+    --wash: #101830;
+    --link: #8db4ff;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+html[data-theme="dark"] body { background: var(--dk-page); color: var(--ink); }
+html[data-theme="dark"] .nav { background: var(--dk-page); }
+html[data-theme="dark"] .skip { background: var(--dk-surface); color: var(--ink); }
+
+html[data-theme="dark"] .hero-panel,
+html[data-theme="dark"] .form-panel { background: var(--dk-surface); }
+
+html[data-theme="dark"] .field input,
+html[data-theme="dark"] .field textarea {
+    background: var(--dk-page);
+    border-color: #3a4a7a;
+    color: var(--ink);
+}
+
+html[data-theme="dark"] .btn-line:hover { background: var(--ink); color: var(--dk-page); }
+
+/* The logo files have a white background, so they sit on a light tile */
+html[data-theme="dark"] .logo img { background: #ffffff; border-radius: 10px; padding: 3px; }
+html[data-theme="dark"] .foot img {
+    mix-blend-mode: normal !important;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+html[data-theme="dark"] .band { background: #0d2562; }
+html[data-theme="dark"] .hero-photo { filter: brightness(0.9); }
+
+/* Status, errors and accents need lighter shades to stay readable */
+html[data-theme="dark"] .status { color: #ff8a80; }
+html[data-theme="dark"] .status .dot { background: #ff8a80; }
+html[data-theme="dark"] .status.is-open { color: #6fdc8c; }
+html[data-theme="dark"] .status.is-open .dot { background: #4cc66d; }
+html[data-theme="dark"] .error { color: #ff8a80; }
+html[data-theme="dark"] .chev { border-color: var(--orange); }
+html[data-theme="dark"] .steps li::before { color: var(--orange); }
+html[data-theme="dark"] .acc-body li::before { border-color: #6fdc8c; }
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+    .nav-inner { position: relative; }
+    .theme-toggle { position: absolute; top: 8px; right: 24px; width: 38px; height: 38px; margin: 0; }
+}
+
+/* ---------- Smooth change when switching ---------- */
+@media (prefers-reduced-motion: no-preference) {
+    html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle { transition: none; }
+}
